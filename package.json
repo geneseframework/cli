@@ -1,0 +1,31 @@
+{
+    "name": "@genese/cli",
+    "version": "0.0.1",
+    "description": "CLI for Genese framework",
+    "scripts": {
+        "build": "tsc",
+        "start": "npm run build && node dist/src/index.js",
+        "publish_package": "npm run build && npm publish"
+    },
+    "bin": {
+        "genese": "dist/src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/geneseframework/genese-cli.git"
+    },
+    "author": {
+        "name": "Gilles Fabre",
+        "url": "http://gillesfabre.com/"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/geneseframework/genese-cli/issues"
+    },
+    "homepage": "https://github.com/geneseframework/genese-cli#readme",
+    "dependencies": {
+        "@types/node": "^14.14.8",
+        "chalk": "^4.1.0",
+        "commander": "^6.2.0"
+    }
+}
