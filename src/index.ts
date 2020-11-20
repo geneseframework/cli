@@ -18,10 +18,10 @@ program.command('cpx [pathToAnalyse]')
     .option('-c, --console', 'Disable report generation and outputs to console', false)
     .option('-r, --refactor', 'EXPERIMENTAL! Enable refactoring report generation', false)
     .action((pathToAnalyse, options) => {
-        const complexityPath = `${__dirname}/../../../complexity`;
-        const cpxPkg = require(`${complexityPath}/dist/package.json`);
+        const subCommandPath = `${__dirname}/../../../complexity`;
+        const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
         spawn('node', [
-            `${complexityPath}/${cpxPkg.bin}`,
+            `${subCommandPath}/${subCommandPkg.bin}`,
             pathToAnalyse ?? '.',
             options.language,
             options.markdown,
@@ -35,7 +35,13 @@ program.command('cpx [pathToAnalyse]')
 program.command('api')
     .description('Generates Angular or React Api')
     .action(() => {
-
+        const subCommandPath = `${__dirname}/../../../api`;
+        const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
+        spawn('node', [
+            `${subCommandPath}/${subCommandPkg.bin}`,
+        ], {
+            stdio: ['inherit', 'inherit', 'inherit']
+        });
     });
 
 program.parse(process.argv);
