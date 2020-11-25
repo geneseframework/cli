@@ -14,19 +14,19 @@ program.version(pkg.version)
 program.command('cpx [pathToAnalyse]')
     .description('Calculates Complexity Index and cyclomatic complexity')
     .option('-l, --language <language>', 'Language: js, ts, jsx, tsx or java', 'ts')
-    .option('-md, --markdown', 'Markdown type report', false)
-    .option('-c, --console', 'Disable report generation and outputs to console', false)
-    .option('-r, --refactor', 'EXPERIMENTAL! Enable refactoring report generation', false)
+    .option('-md, --markdown', 'Markdown type report')
+    .option('-c, --console', 'Disable report generation and outputs to console')
+    .option('-r, --refactor', 'EXPERIMENTAL! Enable refactoring report generation')
     .action((pathToAnalyse, options) => {
         const subCommandPath = `${__dirname}/../../../complexity`;
         const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
             pathToAnalyse ?? '.',
-            options.language,
-            options.markdown,
-            options.console,
-            options.refactor
+            options.language ?? false,
+            options.markdown ?? false,
+            options.console ?? false,
+            options.refactor ?? false
         ], {
             stdio: ['inherit', 'inherit', 'inherit']
         });
