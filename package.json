@@ -1,6 +1,6 @@
 {
     "name": "@genese/cli",
-    "version": "0.0.10",
+    "version": "0.0.12",
     "description": "CLI for Genese framework",
     "scripts": {
         "build": "tsc",
@@ -24,13 +24,15 @@
     },
     "homepage": "https://github.com/geneseframework/genese-cli#readme",
     "dependencies": {
+        "@jscpd/core": "^3.3.17",
         "@types/commander": "^2.12.2",
         "@types/node": "^14.14.8",
         "chalk": "^4.1.0",
-        "commander": "^6.2.0"
+        "commander": "^6.2.0",
+        "jscpd": "^3.3.21"
     },
     "peerDependencies": {
-        "@genese/api": "^0.0.2",
+        "@genese/api": "^0.0.4",
         "@genese/complexity": "^0.0.4"
     }
 }
