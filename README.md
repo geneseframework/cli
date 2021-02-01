@@ -10,17 +10,17 @@ Genese-cli is a command line interface to ease the use of the other genese packa
 Please install globally the npm module:
 
 ```sh
-npm i -g @genese/cli
+npm i -g genese-cli
 ```
 
 ### 2 Genese complexity
 
 The Genese Complexity module analyzes the cognitive complexity and the cyclomatic complexity of projects.
 
-After installing @genese/cli globally, you'll need to install the complexity module.
+After installing genese-cli globally, you'll need to install the complexity module.
 
 ```sh
-npm i -g @genese/complexity
+npm i -g genese-complexity
 ```
 
 Then, you can launch the analysis with this command-line:
@@ -51,7 +51,7 @@ It's available for Angular and React.
 After installing @genese/cli globally, you'll need to install the complexity module.
 
 ```sh
-npm i -g @genese/api
+npm i -g genese-api
 ```
 
 Then, you can start the generation with this command-line:

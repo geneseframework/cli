@@ -19,7 +19,7 @@ program.command('cpx [pathToAnalyse]')
     .option('-c, --console', 'Disable report generation and outputs to console')
     .option('-r, --refactor', 'EXPERIMENTAL! Enable refactoring report generation')
     .action((pathToAnalyse, options) => {
-        const subCommandPath = `${__dirname}/../../../complexity`;
+        const subCommandPath = `${__dirname}/../../../genese-complexity`;
         const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
