@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import * as program from 'commander';
-// import { Duplicates } from './duplicates';
 
 const chalk = require('chalk');
 const pkg = require('../package.json');
@@ -21,8 +20,6 @@ program.command('cpx [pathToAnalyse]')
     .action((pathToAnalyse, options) => {
         const subCommandPath = `${__dirname}/../../../genese-complexity`;
         const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
-        console.log('SUBCOMMANDPKG', subCommandPath)
-        console.log('SUBCOMMANDPKG', subCommandPkg)
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
             pathToAnalyse ?? '.',
@@ -58,16 +55,5 @@ program.command('api')
             stdio: ['inherit', 'inherit', 'inherit']
         });
     })
-
-// program.command('dup [pathToAnalyse]')
-//     .description('Detects copy/paste in files')
-//     .action((pathToAnalyse) => {
-//         Duplicates.run(pathToAnalyse ?? '.')
-//             .then(clones => {
-//                clones.forEach(clone => {
-//                    console.log(clone.duplicationA, clone.duplicationB);
-//                })
-//             });
-//     })
 
 program.parse(process.argv);
