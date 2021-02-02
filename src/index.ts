@@ -21,6 +21,8 @@ program.command('cpx [pathToAnalyse]')
     .action((pathToAnalyse, options) => {
         const subCommandPath = `${__dirname}/../../../genese-complexity`;
         const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
+        console.log('SUBCOMMANDPKG', subCommandPath)
+        console.log('SUBCOMMANDPKG', subCommandPkg)
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
             pathToAnalyse ?? '.',
