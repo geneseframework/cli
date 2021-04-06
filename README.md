@@ -1,23 +1,22 @@
-# Genese-cli
+# @genese/cli
 
-Genese-cli is a command line interface to ease the use of the other genese packages:
+`@genese/cli` is a command line interface to ease the use of the other genese packages:
 * [genese-complexity](https://github.com/geneseframework/genese-complexity)
 * [genese-api](https://github.com/geneseframework/genese-api)
-* [genese-duplicates](https://github.com/geneseframework/genese-duplicates)
 
 ## 1. Installation
 
 Please install globally the npm module:
 
 ```sh
-npm i -g genese-cli
+npm i -g @genese/cli
 ```
 
 ### 2 Genese complexity
 
-The Genese Complexity module analyzes the cognitive complexity and the cyclomatic complexity of projects.
+The `@genese/complexity` module analyzes the cognitive complexity and the cyclomatic complexity of projects.
 
-After installing genese-cli globally, you'll need to install the complexity module.
+After installing `@genese/cli` globally, you must install the complexity module.
 
 ```sh
 npm i -g genese-complexity
