@@ -5,7 +5,8 @@
     "scripts": {
         "build": "tsc",
         "start": "npm run build && node dist/src/index.js",
-        "publish_package": "npm run build && npm publish"
+        "publish_package": "npm run build && npm publish",
+        "republish_package": "npm run build && npm unpublish -f && npm publish"
     },
     "bin": {
         "genese": "dist/src/index.js"
@@ -33,6 +34,6 @@
     },
     "peerDependencies": {
         "genese-api": "^0.0.4",
-        "genese-complexity": "^0.0.4"
+        "genese-complexity": "^0.1.0"
     }
 }

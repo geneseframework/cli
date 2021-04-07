@@ -4,7 +4,7 @@
 * [genese-complexity](https://github.com/geneseframework/genese-complexity)
 * [genese-api](https://github.com/geneseframework/genese-api)
 
-## 1. Installation
+## Installation
 
 Please install globally the npm module:
 
@@ -12,7 +12,7 @@ Please install globally the npm module:
 npm i -g @genese/cli
 ```
 
-### 2 Genese complexity
+### Genese complexity
 
 The `@genese/complexity` module analyzes the cognitive complexity and the cyclomatic complexity of projects.
 
@@ -41,9 +41,9 @@ Genese complexity is available for TypeScript, JavaScript and Java.
 
 You will find more information in the [genese-complexity documentation](https://github.com/geneseframework/genese-complexity).
 
-### 2 Genese API
+### Genese API
 
-Genese API module is a code generators which allows you to generate data-services and DTO models from an OpenAPI file.
+Genese API module is a code generator which allows you to generate data-services and DTO models from an OpenAPI file.
 
 It's available for Angular and React.
 
