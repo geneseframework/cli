@@ -1,6 +1,6 @@
 {
     "name": "@genese/cli",
-    "version": "0.1.0",
+    "version": "1.0.5",
     "description": "CLI for @genese modules",
     "scripts": {
         "build": "tsc",
@@ -33,7 +33,7 @@
         "jscpd": "^3.3.21"
     },
     "peerDependencies": {
-        "genese-api": "^0.0.4",
-        "genese-complexity": "^0.1.0"
+        "@genese/complexity": "^1.0.0",
+        "@genese/api": "^1.0.4"
     }
 }
