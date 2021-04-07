@@ -6,7 +6,7 @@ const chalk = require('chalk');
 const pkg = require('../package.json');
 const { spawn } = require('child_process');
 
-console.log(chalk.yellow('WELCOME TO GENESE CLI'));
+console.log(chalk.yellow('Welcome to @genese cli'));
 
 program.version(pkg.version)
     .description(pkg.description);
@@ -18,7 +18,7 @@ program.command('cpx [pathToAnalyse]')
     .option('-c, --console', 'Disable report generation and outputs to console')
     .option('-r, --refactor', 'EXPERIMENTAL! Enable refactoring report generation')
     .action((pathToAnalyse, options) => {
-        const subCommandPath = `${__dirname}/../../../genese-complexity`;
+        const subCommandPath = `${__dirname}/../../../../genese-complexity`;
         const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
