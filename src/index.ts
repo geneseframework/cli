@@ -15,8 +15,8 @@ program.command('cpx [pathToAnalyse]')
     .description('Calculates Complexity Index and cyclomatic complexity')
     .option('-l, --language <language>', 'Language: js, ts, jsx, tsx or java', 'ts')
     .option('-md, --markdown', 'Markdown type report')
-    .option('-c, --console', 'Disable report generation and outputs to console')
-    .option('-r, --refactor', 'EXPERIMENTAL! Enable refactoring report generation')
+    .option('-c, --console', 'Disables report generation and outputs to console')
+    .option('-r, --refactor', 'EXPERIMENTAL! Enables refactoring report generation')
     .action((pathToAnalyse, options) => {
         const subCommandPath = `${__dirname}/../../../../genese-complexity`;
         const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
