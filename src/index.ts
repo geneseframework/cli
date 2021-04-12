@@ -18,8 +18,13 @@ program.command('cpx [pathToAnalyse]')
     .option('-c, --console', 'Disables report generation and outputs to console')
     .option('-r, --refactor', 'EXPERIMENTAL! Enables refactoring report generation')
     .action((pathToAnalyse, options) => {
-        const subCommandPath = `${__dirname}/../../../../genese-complexity`;
-        const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
+        const subCommandPath = `C:\\Users\\gille\\AppData\\Roaming\\npm\\node_modules\\@genese\\complexity`;
+        // const subCommandPath = `${__dirname}\\..\\..\\..\\..\\complexity`;
+        // const subCommandPath = `${__dirname}/../../../../complexity`;
+        const subCommandPkg = require(`${subCommandPath}\\dist\\package.json`);
+        // const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
+        console.log(chalk.magentaBright('PLATFORM PATHHHHH subCommandPath'), subCommandPath);
+        console.log(chalk.magentaBright('PLATFORM PATHHHHH subCommandPkg'), subCommandPkg);
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
             pathToAnalyse ?? '.',
