@@ -1,5 +1,3 @@
-import * as chalk from "chalk";
-
 export enum OS {
     LINUX = "Linux",
     MACOS = "Mac OS",
@@ -18,15 +16,9 @@ export function isWindows(): boolean {
 }
 
 export function platformPath(path: string): string {
-    console.log(chalk.yellowBright('PLATFORM PATHHHHH'), path);
     const modifiedPath = path.split('/').filter(e => e !== '.').join('/');
-    console.log(chalk.yellowBright('PLATFORM PATHHHHH modifiedPath'), modifiedPath);
-    console.log(chalk.yellowBright('PLATFORM PATHHHHH isWindows'), isWindows());
-    console.log(chalk.yellowBright('PLATFORM PATHHHHH windowsPath(modifiedPath)'), windowsPath(modifiedPath));
     return isWindows() ? windowsPath(modifiedPath) : modifiedPath;
 }
-
-platformPath('C:\\Users\\gille');
 
 
 export function windowsPath(path: string): string {
