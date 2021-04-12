@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import * as program from 'commander';
+import { platformPath } from './utils/paths.util';
 
 const chalk = require('chalk');
 const pkg = require('../package.json');
@@ -18,8 +19,8 @@ program.command('cpx [pathToAnalyse]')
     .option('-c, --console', 'Disables report generation and outputs to console')
     .option('-r, --refactor', 'EXPERIMENTAL! Enables refactoring report generation')
     .action((pathToAnalyse, options) => {
-        const subCommandPath = `${__dirname}/../../../../genese-complexity`;
-        const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
+        const subCommandPath = `${__dirname}${platformPath(`/../../../complexity`)}`;
+        const subCommandPkg = require(`${subCommandPath}${platformPath(`/dist/package.json`)}`);
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
             pathToAnalyse ?? '.',
@@ -41,8 +42,8 @@ program.command('api')
     .option('--servicesOutput <servicesOutput>')
     .option('--splitServices')
     .action((options) => {
-        const subCommandPath = `${__dirname}/../../../api`;
-        const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
+        const subCommandPath = `${__dirname}${platformPath(`/../../../api`)}`;
+        const subCommandPkg = require(`${subCommandPath}${platformPath(`/dist/package.json`)}`);
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
             options.jsonApiPath,

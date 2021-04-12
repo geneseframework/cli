@@ -1,11 +1,12 @@
 {
     "name": "@genese/cli",
-    "version": "1.0.5",
+    "version": "1.1.2",
     "description": "CLI for @genese modules",
     "scripts": {
         "build": "tsc",
         "start": "npm run build && node dist/src/index.js",
         "publish_package": "npm run build && npm publish",
+        "reinstall": "npm run republish_package && npm i -g @genese/cli",
         "republish_package": "npm run build && npm unpublish -f && npm publish"
     },
     "bin": {
@@ -30,10 +31,8 @@
         "@types/node": "^14.14.8",
         "chalk": "^4.1.0",
         "commander": "^6.2.0",
-        "jscpd": "^3.3.21"
-    },
-    "peerDependencies": {
-        "@genese/complexity": "^1.0.0",
-        "@genese/api": "^1.0.4"
+        "jscpd": "^3.3.21",
+        "ts-node": "^9.1.1",
+        "typescript": "^4.2.4"
     }
 }
