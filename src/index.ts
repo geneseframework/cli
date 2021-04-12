@@ -42,8 +42,8 @@ program.command('api')
     .option('--servicesOutput <servicesOutput>')
     .option('--splitServices')
     .action((options) => {
-        const subCommandPath = `${__dirname}/../../../api`;
-        const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
+        const subCommandPath = `${__dirname}${platformPath(`/../../../api`)}`;
+        const subCommandPkg = require(`${subCommandPath}${platformPath(`/dist/package.json`)}`);
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
             options.jsonApiPath,
