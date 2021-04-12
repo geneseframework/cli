@@ -1,12 +1,12 @@
 {
 	"astFolder": {
-		"path": "D:\\Documents\\projets\\genese\\cli\\src\\",
+		"path": "/Users/utilisateur/Documents/projets/genese/cli/src/",
 		"astFiles": [
 			{
 				"name": "index.ts",
-				"text": "#!/usr/bin/env node\n\nimport * as program from 'commander';\n\nconst chalk = require('chalk');\nconst pkg = require('../package.json');\nconst { spawn } = require('child_process');\n\nconsole.log(chalk.yellow('Welcome to @genese cli'));\n\nprogram.version(pkg.version)\n    .description(pkg.description);\n\nprogram.command('cpx [pathToAnalyse]')\n    .description('Calculates Complexity Index and cyclomatic complexity')\n    .option('-l, --language <language>', 'Language: js, ts, jsx, tsx or java', 'ts')\n    .option('-md, --markdown', 'Markdown type report')\n    .option('-c, --console', 'Disables report generation and outputs to console')\n    .option('-r, --refactor', 'EXPERIMENTAL! Enables refactoring report generation')\n    .action((pathToAnalyse, options) => {\n        // const subCommandPath = `C:\\\\Users\\\\gille\\\\AppData\\\\Roaming\\\\npm\\\\node_modules\\\\@genese\\\\complexity`;\n        const subCommandPath = `${__dirname}\\\\..\\\\..\\\\..\\\\complexity`;\n        // const subCommandPath = `${__dirname}/../../../../complexity`;\n        const subCommandPkg = require(`${subCommandPath}\\\\dist\\\\package.json`);\n        // const subCommandPkg = require(`${subCommandPath}/dist/package.json`);\n        console.log(chalk.magentaBright('PLATFORM PATHHHHH subCommandPath'), subCommandPath);\n        console.log(chalk.magentaBright('PLATFORM PATHHHHH subCommandPkg'), subCommandPkg);\n        spawn('node', [\n            `${subCommandPath}/${subCommandPkg.bin}`,\n            pathToAnalyse ?? '.',\n            options.language ?? false,\n            options.markdown ?? false,\n            options.console ?? false,\n            options.refactor ?? false\n        ], {\n            stdio: ['inherit', 'inherit', 'inherit']\n        });\n    });\n\nprogram.command('api')\n    .description('Generates Angular or React Api')\n    .option('--jsonApiPath <jsonApiPath>')\n    .option('--datatypeExtension <datatypeExtension>')\n    .option('--serviceExtension <serviceExtension>')\n    .option('--datatypesOutput <datatypesOutput>')\n    .option('--servicesOutput <servicesOutput>')\n    .option('--splitServices')\n    .action((options) => {\n        const subCommandPath = `${__dirname}/../../../api`;\n        const subCommandPkg = require(`${subCommandPath}/dist/package.json`);\n        spawn('node', [\n            `${subCommandPath}/${subCommandPkg.bin}`,\n            options.jsonApiPath,\n            options.datatypeExtension,\n            options.serviceExtension,\n            options.datatypesOutput,\n            options.servicesOutput,\n            options.splitServices\n        ], {\n            stdio: ['inherit', 'inherit', 'inherit']\n        });\n    })\n\nprogram.parse(process.argv);\n",
+				"text": "#!/usr/bin/env node\n\nimport * as program from 'commander';\nimport { platformPath } from './utils/paths.util';\n\nconst chalk = require('chalk');\nconst pkg = require('../package.json');\nconst { spawn } = require('child_process');\n\nconsole.log(chalk.yellow('Welcome to @genese cli'));\n\nprogram.version(pkg.version)\n    .description(pkg.description);\n\nprogram.command('cpx [pathToAnalyse]')\n    .description('Calculates Complexity Index and cyclomatic complexity')\n    .option('-l, --language <language>', 'Language: js, ts, jsx, tsx or java', 'ts')\n    .option('-md, --markdown', 'Markdown type report')\n    .option('-c, --console', 'Disables report generation and outputs to console')\n    .option('-r, --refactor', 'EXPERIMENTAL! Enables refactoring report generation')\n    .action((pathToAnalyse, options) => {\n        // const subCommandPath = `C:\\\\Users\\\\gille\\\\AppData\\\\Roaming\\\\npm\\\\node_modules\\\\@genese\\\\complexity`;\n        // const subCommandPath = `${__dirname}${platformPath(`\\\\..\\\\..\\\\..\\\\complexity`)}`;\n        const subCommandPath = `${__dirname}${platformPath(`/../../../complexity`)}`;\n        // const subCommandPath = `${__dirname}/../../../../complexity`;\n        console.log(chalk.magentaBright('PLATFORM PATHHHHH subCommandPath'), subCommandPath);\n        const subCommandPkg = require(`${subCommandPath}${platformPath(`/dist/package.json`)}`);\n        // const subCommandPkg = require(`${subCommandPath}/dist/package.json`);\n        console.log(chalk.magentaBright('PLATFORM PATHHHHH subCommandPkg'), subCommandPkg);\n        spawn('node', [\n            `${subCommandPath}/${subCommandPkg.bin}`,\n            pathToAnalyse ?? '.',\n            options.language ?? false,\n            options.markdown ?? false,\n            options.console ?? false,\n            options.refactor ?? false\n        ], {\n            stdio: ['inherit', 'inherit', 'inherit']\n        });\n    });\n\nprogram.command('api')\n    .description('Generates Angular or React Api')\n    .option('--jsonApiPath <jsonApiPath>')\n    .option('--datatypeExtension <datatypeExtension>')\n    .option('--serviceExtension <serviceExtension>')\n    .option('--datatypesOutput <datatypesOutput>')\n    .option('--servicesOutput <servicesOutput>')\n    .option('--splitServices')\n    .action((options) => {\n        const subCommandPath = `${__dirname}/../../../api`;\n        const subCommandPkg = require(`${subCommandPath}/dist/package.json`);\n        spawn('node', [\n            `${subCommandPath}/${subCommandPkg.bin}`,\n            options.jsonApiPath,\n            options.datatypeExtension,\n            options.serviceExtension,\n            options.datatypesOutput,\n            options.servicesOutput,\n            options.splitServices\n        ], {\n            stdio: ['inherit', 'inherit', 'inherit']\n        });\n    })\n\nprogram.parse(process.argv);\n",
 				"astNode": {
-					"end": 2645,
+					"end": 2821,
 					"kind": "SourceFile",
 					"pos": 0,
 					"start": 21,
@@ -49,49 +49,94 @@
 							]
 						},
 						{
-							"end": 91,
-							"kind": "Keyword",
+							"end": 109,
+							"kind": "ImportDeclaration",
 							"pos": 58,
-							"start": 60,
+							"start": 59,
 							"children": [
 								{
-									"end": 90,
-									"kind": "VariableDeclarationList",
-									"pos": 58,
-									"start": 60,
+									"end": 82,
+									"kind": "ImportClause",
+									"pos": 65,
+									"start": 66,
 									"children": [
 										{
-											"end": 90,
-											"kind": "VariableDeclaration",
+											"end": 82,
+											"kind": "NamedImports",
 											"pos": 65,
 											"start": 66,
 											"children": [
 												{
-													"end": 71,
+													"end": 80,
+													"kind": "ImportSpecifier",
+													"pos": 67,
+													"start": 68,
+													"children": [
+														{
+															"end": 80,
+															"kind": "Identifier",
+															"name": "platformPath",
+															"pos": 67,
+															"start": 68
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"end": 108,
+									"kind": "Literal",
+									"pos": 87,
+									"start": 88
+								}
+							]
+						},
+						{
+							"end": 142,
+							"kind": "Keyword",
+							"pos": 109,
+							"start": 111,
+							"children": [
+								{
+									"end": 141,
+									"kind": "VariableDeclarationList",
+									"pos": 109,
+									"start": 111,
+									"children": [
+										{
+											"end": 141,
+											"kind": "VariableDeclaration",
+											"pos": 116,
+											"start": 117,
+											"children": [
+												{
+													"end": 122,
 													"kind": "Identifier",
 													"name": "chalk",
-													"pos": 65,
-													"start": 66
+													"pos": 116,
+													"start": 117
 												},
 												{
-													"end": 90,
+													"end": 141,
 													"kind": "CallExpression",
-													"pos": 73,
-													"start": 74,
+													"pos": 124,
+													"start": 125,
 													"children": [
 														{
-															"end": 81,
+															"end": 132,
 															"kind": "Identifier",
 															"name": "require",
-															"pos": 73,
-															"start": 74,
+															"pos": 124,
+															"start": 125,
 															"type": "function"
 														},
 														{
-															"end": 89,
+															"end": 140,
 															"kind": "Literal",
-															"pos": 82,
-															"start": 82
+															"pos": 133,
+															"start": 133
 														}
 													]
 												}
@@ -102,49 +147,49 @@
 							]
 						},
 						{
-							"end": 131,
+							"end": 182,
 							"kind": "Keyword",
-							"pos": 91,
-							"start": 92,
+							"pos": 142,
+							"start": 143,
 							"children": [
 								{
-									"end": 130,
+									"end": 181,
 									"kind": "VariableDeclarationList",
-									"pos": 91,
-									"start": 92,
+									"pos": 142,
+									"start": 143,
 									"children": [
 										{
-											"end": 130,
+											"end": 181,
 											"kind": "VariableDeclaration",
-											"pos": 97,
-											"start": 98,
+											"pos": 148,
+											"start": 149,
 											"children": [
 												{
-													"end": 101,
+													"end": 152,
 													"kind": "Identifier",
 													"name": "pkg",
-													"pos": 97,
-													"start": 98
+													"pos": 148,
+													"start": 149
 												},
 												{
-													"end": 130,
+													"end": 181,
 													"kind": "CallExpression",
-													"pos": 103,
-													"start": 104,
+													"pos": 154,
+													"start": 155,
 													"children": [
 														{
-															"end": 111,
+															"end": 162,
 															"kind": "Identifier",
 															"name": "require",
-															"pos": 103,
-															"start": 104,
+															"pos": 154,
+															"start": 155,
 															"type": "function"
 														},
 														{
-															"end": 129,
+															"end": 180,
 															"kind": "Literal",
-															"pos": 112,
-															"start": 112
+															"pos": 163,
+															"start": 163
 														}
 													]
 												}
@@ -155,65 +200,65 @@
 							]
 						},
 						{
-							"end": 175,
+							"end": 226,
 							"kind": "Keyword",
-							"pos": 131,
-							"start": 132,
+							"pos": 182,
+							"start": 183,
 							"children": [
 								{
-									"end": 174,
+									"end": 225,
 									"kind": "VariableDeclarationList",
-									"pos": 131,
-									"start": 132,
+									"pos": 182,
+									"start": 183,
 									"children": [
 										{
-											"end": 174,
+											"end": 225,
 											"kind": "VariableDeclaration",
-											"pos": 137,
-											"start": 138,
+											"pos": 188,
+											"start": 189,
 											"children": [
 												{
-													"end": 147,
+													"end": 198,
 													"kind": "ObjectBindingPattern",
-													"pos": 137,
-													"start": 138,
+													"pos": 188,
+													"start": 189,
 													"children": [
 														{
-															"end": 145,
+															"end": 196,
 															"kind": "BindingElement",
-															"pos": 139,
-															"start": 140,
+															"pos": 190,
+															"start": 191,
 															"children": [
 																{
-																	"end": 145,
+																	"end": 196,
 																	"kind": "Identifier",
 																	"name": "spawn",
-																	"pos": 139,
-																	"start": 140
+																	"pos": 190,
+																	"start": 191
 																}
 															]
 														}
 													]
 												},
 												{
-													"end": 174,
+													"end": 225,
 													"kind": "CallExpression",
-													"pos": 149,
-													"start": 150,
+													"pos": 200,
+													"start": 201,
 													"children": [
 														{
-															"end": 157,
+															"end": 208,
 															"kind": "Identifier",
 															"name": "require",
-															"pos": 149,
-															"start": 150,
+															"pos": 200,
+															"start": 201,
 															"type": "function"
 														},
 														{
-															"end": 173,
+															"end": 224,
 															"kind": "Literal",
-															"pos": 158,
-															"start": 158
+															"pos": 209,
+															"start": 209
 														}
 													]
 												}
@@ -224,74 +269,74 @@
 							]
 						},
 						{
-							"end": 229,
+							"end": 280,
 							"kind": "ExpressionStatement",
-							"pos": 175,
-							"start": 177,
+							"pos": 226,
+							"start": 228,
 							"children": [
 								{
-									"end": 228,
+									"end": 279,
 									"kind": "CallExpression",
-									"pos": 175,
-									"start": 177,
+									"pos": 226,
+									"start": 228,
 									"children": [
 										{
-											"end": 188,
+											"end": 239,
 											"kind": "PropertyAccessExpression",
-											"pos": 175,
-											"start": 177,
+											"pos": 226,
+											"start": 228,
 											"children": [
 												{
-													"end": 184,
+													"end": 235,
 													"kind": "Identifier",
 													"name": "console",
-													"pos": 175,
-													"start": 177
+													"pos": 226,
+													"start": 228
 												},
 												{
-													"end": 188,
+													"end": 239,
 													"kind": "Identifier",
 													"name": "log",
-													"pos": 185,
-													"start": 185,
+													"pos": 236,
+													"start": 236,
 													"type": "function"
 												}
 											]
 										},
 										{
-											"end": 227,
+											"end": 278,
 											"kind": "CallExpression",
-											"pos": 189,
-											"start": 189,
+											"pos": 240,
+											"start": 240,
 											"children": [
 												{
-													"end": 201,
+													"end": 252,
 													"kind": "PropertyAccessExpression",
-													"pos": 189,
-													"start": 189,
+													"pos": 240,
+													"start": 240,
 													"children": [
 														{
-															"end": 194,
+															"end": 245,
 															"kind": "Identifier",
 															"name": "chalk",
-															"pos": 189,
-															"start": 189
+															"pos": 240,
+															"start": 240
 														},
 														{
-															"end": 201,
+															"end": 252,
 															"kind": "Identifier",
 															"name": "yellow",
-															"pos": 195,
-															"start": 195,
+															"pos": 246,
+															"start": 246,
 															"type": "function"
 														}
 													]
 												},
 												{
-													"end": 226,
+													"end": 277,
 													"kind": "Literal",
-													"pos": 202,
-													"start": 202
+													"pos": 253,
+													"start": 253
 												}
 											]
 										}
@@ -300,105 +345,105 @@
 							]
 						},
 						{
-							"end": 294,
+							"end": 345,
 							"kind": "ExpressionStatement",
-							"pos": 229,
-							"start": 231,
+							"pos": 280,
+							"start": 282,
 							"children": [
 								{
-									"end": 293,
+									"end": 344,
 									"kind": "CallExpression",
-									"pos": 229,
-									"start": 231,
+									"pos": 280,
+									"start": 282,
 									"children": [
 										{
-											"end": 276,
+											"end": 327,
 											"kind": "PropertyAccessExpression",
-											"pos": 229,
-											"start": 231,
+											"pos": 280,
+											"start": 282,
 											"children": [
 												{
-													"end": 259,
+													"end": 310,
 													"kind": "CallExpression",
-													"pos": 229,
-													"start": 231,
+													"pos": 280,
+													"start": 282,
 													"children": [
 														{
-															"end": 246,
+															"end": 297,
 															"kind": "PropertyAccessExpression",
-															"pos": 229,
-															"start": 231,
+															"pos": 280,
+															"start": 282,
 															"children": [
 																{
-																	"end": 238,
+																	"end": 289,
 																	"kind": "Identifier",
 																	"name": "program",
-																	"pos": 229,
-																	"start": 231
+																	"pos": 280,
+																	"start": 282
 																},
 																{
-																	"end": 246,
+																	"end": 297,
 																	"kind": "Identifier",
 																	"name": "version",
-																	"pos": 239,
-																	"start": 239,
+																	"pos": 290,
+																	"start": 290,
 																	"type": "function"
 																}
 															]
 														},
 														{
-															"end": 258,
+															"end": 309,
 															"kind": "PropertyAccessExpression",
-															"pos": 247,
-															"start": 247,
+															"pos": 298,
+															"start": 298,
 															"children": [
 																{
-																	"end": 250,
+																	"end": 301,
 																	"kind": "Identifier",
 																	"name": "pkg",
-																	"pos": 247,
-																	"start": 247
+																	"pos": 298,
+																	"start": 298
 																},
 																{
-																	"end": 258,
+																	"end": 309,
 																	"kind": "Identifier",
 																	"name": "version",
-																	"pos": 251,
-																	"start": 251
+																	"pos": 302,
+																	"start": 302
 																}
 															]
 														}
 													]
 												},
 												{
-													"end": 276,
+													"end": 327,
 													"kind": "Identifier",
 													"name": "description",
-													"pos": 265,
-													"start": 265,
+													"pos": 316,
+													"start": 316,
 													"type": "function"
 												}
 											]
 										},
 										{
-											"end": 292,
+											"end": 343,
 											"kind": "PropertyAccessExpression",
-											"pos": 277,
-											"start": 277,
+											"pos": 328,
+											"start": 328,
 											"children": [
 												{
-													"end": 280,
+													"end": 331,
 													"kind": "Identifier",
 													"name": "pkg",
-													"pos": 277,
-													"start": 277
+													"pos": 328,
+													"start": 328
 												},
 												{
-													"end": 292,
+													"end": 343,
 													"kind": "Identifier",
 													"name": "description",
-													"pos": 281,
-													"start": 281
+													"pos": 332,
+													"start": 332
 												}
 											]
 										}
@@ -407,437 +452,391 @@
 							]
 						},
 						{
-							"end": 1712,
+							"end": 1888,
 							"kind": "ExpressionStatement",
-							"pos": 294,
-							"start": 296,
+							"pos": 345,
+							"start": 347,
 							"children": [
 								{
-									"end": 1711,
+									"end": 1887,
 									"kind": "CallExpression",
-									"pos": 294,
-									"start": 296,
+									"pos": 345,
+									"start": 347,
 									"children": [
 										{
-											"end": 727,
+											"end": 778,
 											"kind": "PropertyAccessExpression",
-											"pos": 294,
-											"start": 296,
+											"pos": 345,
+											"start": 347,
 											"children": [
 												{
-													"end": 715,
+													"end": 766,
 													"kind": "CallExpression",
-													"pos": 294,
-													"start": 296,
+													"pos": 345,
+													"start": 347,
 													"children": [
 														{
-															"end": 642,
+															"end": 693,
 															"kind": "PropertyAccessExpression",
-															"pos": 294,
-															"start": 296,
+															"pos": 345,
+															"start": 347,
 															"children": [
 																{
-																	"end": 630,
+																	"end": 681,
 																	"kind": "CallExpression",
-																	"pos": 294,
-																	"start": 296,
+																	"pos": 345,
+																	"start": 347,
 																	"children": [
 																		{
-																			"end": 560,
+																			"end": 611,
 																			"kind": "PropertyAccessExpression",
-																			"pos": 294,
-																			"start": 296,
+																			"pos": 345,
+																			"start": 347,
 																			"children": [
 																				{
-																					"end": 548,
+																					"end": 599,
 																					"kind": "CallExpression",
-																					"pos": 294,
-																					"start": 296,
+																					"pos": 345,
+																					"start": 347,
 																					"children": [
 																						{
-																							"end": 505,
+																							"end": 556,
 																							"kind": "PropertyAccessExpression",
-																							"pos": 294,
-																							"start": 296,
+																							"pos": 345,
+																							"start": 347,
 																							"children": [
 																								{
-																									"end": 493,
+																									"end": 544,
 																									"kind": "CallExpression",
-																									"pos": 294,
-																									"start": 296,
+																									"pos": 345,
+																									"start": 347,
 																									"children": [
 																										{
-																											"end": 420,
+																											"end": 471,
 																											"kind": "PropertyAccessExpression",
-																											"pos": 294,
-																											"start": 296,
+																											"pos": 345,
+																											"start": 347,
 																											"children": [
 																												{
-																													"end": 408,
+																													"end": 459,
 																													"kind": "CallExpression",
-																													"pos": 294,
-																													"start": 296,
+																													"pos": 345,
+																													"start": 347,
 																													"children": [
 																														{
-																															"end": 351,
+																															"end": 402,
 																															"kind": "PropertyAccessExpression",
-																															"pos": 294,
-																															"start": 296,
+																															"pos": 345,
+																															"start": 347,
 																															"children": [
 																																{
-																																	"end": 334,
+																																	"end": 385,
 																																	"kind": "CallExpression",
-																																	"pos": 294,
-																																	"start": 296,
+																																	"pos": 345,
+																																	"start": 347,
 																																	"children": [
 																																		{
-																																			"end": 311,
+																																			"end": 362,
 																																			"kind": "PropertyAccessExpression",
-																																			"pos": 294,
-																																			"start": 296,
+																																			"pos": 345,
+																																			"start": 347,
 																																			"children": [
 																																				{
-																																					"end": 303,
+																																					"end": 354,
 																																					"kind": "Identifier",
 																																					"name": "program",
-																																					"pos": 294,
-																																					"start": 296
+																																					"pos": 345,
+																																					"start": 347
 																																				},
 																																				{
-																																					"end": 311,
+																																					"end": 362,
 																																					"kind": "Identifier",
 																																					"name": "command",
-																																					"pos": 304,
-																																					"start": 304,
+																																					"pos": 355,
+																																					"start": 355,
 																																					"type": "function"
 																																				}
 																																			]
 																																		},
 																																		{
-																																			"end": 333,
+																																			"end": 384,
 																																			"kind": "Literal",
-																																			"pos": 312,
-																																			"start": 312
+																																			"pos": 363,
+																																			"start": 363
 																																		}
 																																	]
 																																},
 																																{
-																																	"end": 351,
+																																	"end": 402,
 																																	"kind": "Identifier",
 																																	"name": "description",
-																																	"pos": 340,
-																																	"start": 340,
+																																	"pos": 391,
+																																	"start": 391,
 																																	"type": "function"
 																																}
 																															]
 																														},
 																														{
-																															"end": 407,
+																															"end": 458,
 																															"kind": "Literal",
-																															"pos": 352,
-																															"start": 352
+																															"pos": 403,
+																															"start": 403
 																														}
 																													]
 																												},
 																												{
-																													"end": 420,
+																													"end": 471,
 																													"kind": "Identifier",
 																													"name": "option",
-																													"pos": 414,
-																													"start": 414,
+																													"pos": 465,
+																													"start": 465,
 																													"type": "function"
 																												}
 																											]
 																										},
 																										{
-																											"end": 448,
+																											"end": 499,
 																											"kind": "Literal",
-																											"pos": 421,
-																											"start": 421
+																											"pos": 472,
+																											"start": 472
 																										},
 																										{
-																											"end": 486,
+																											"end": 537,
 																											"kind": "Literal",
-																											"pos": 449,
-																											"start": 450
+																											"pos": 500,
+																											"start": 501
 																										},
 																										{
-																											"end": 492,
+																											"end": 543,
 																											"kind": "Literal",
-																											"pos": 487,
-																											"start": 488
+																											"pos": 538,
+																											"start": 539
 																										}
 																									]
 																								},
 																								{
-																									"end": 505,
+																									"end": 556,
 																									"kind": "Identifier",
 																									"name": "option",
-																									"pos": 499,
-																									"start": 499,
+																									"pos": 550,
+																									"start": 550,
 																									"type": "function"
 																								}
 																							]
 																						},
 																						{
-																							"end": 523,
+																							"end": 574,
 																							"kind": "Literal",
-																							"pos": 506,
-																							"start": 506
+																							"pos": 557,
+																							"start": 557
 																						},
 																						{
-																							"end": 547,
+																							"end": 598,
 																							"kind": "Literal",
-																							"pos": 524,
-																							"start": 525
+																							"pos": 575,
+																							"start": 576
 																						}
 																					]
 																				},
 																				{
-																					"end": 560,
+																					"end": 611,
 																					"kind": "Identifier",
 																					"name": "option",
-																					"pos": 554,
-																					"start": 554,
+																					"pos": 605,
+																					"start": 605,
 																					"type": "function"
 																				}
 																			]
 																		},
 																		{
-																			"end": 576,
+																			"end": 627,
 																			"kind": "Literal",
-																			"pos": 561,
-																			"start": 561
+																			"pos": 612,
+																			"start": 612
 																		},
 																		{
-																			"end": 629,
+																			"end": 680,
 																			"kind": "Literal",
-																			"pos": 577,
-																			"start": 578
+																			"pos": 628,
+																			"start": 629
 																		}
 																	]
 																},
 																{
-																	"end": 642,
+																	"end": 693,
 																	"kind": "Identifier",
 																	"name": "option",
-																	"pos": 636,
-																	"start": 636,
+																	"pos": 687,
+																	"start": 687,
 																	"type": "function"
 																}
 															]
 														},
 														{
-															"end": 659,
+															"end": 710,
 															"kind": "Literal",
-															"pos": 643,
-															"start": 643
+															"pos": 694,
+															"start": 694
 														},
 														{
-															"end": 714,
+															"end": 765,
 															"kind": "Literal",
-															"pos": 660,
-															"start": 661
+															"pos": 711,
+															"start": 712
 														}
 													]
 												},
 												{
-													"end": 727,
+													"end": 778,
 													"kind": "Identifier",
 													"name": "action",
-													"pos": 721,
-													"start": 721,
+													"pos": 772,
+													"start": 772,
 													"type": "function"
 												}
 											]
 										},
 										{
-											"end": 1710,
+											"end": 1886,
 											"kind": "ArrowFunction",
-											"pos": 728,
-											"start": 728,
+											"pos": 779,
+											"start": 779,
 											"children": [
 												{
-													"end": 742,
+													"end": 793,
 													"kind": "Parameter",
 													"name": "pathToAnalyse",
-													"pos": 729,
-													"start": 729,
+													"pos": 780,
+													"start": 780,
 													"children": [
 														{
-															"end": 742,
+															"end": 793,
 															"kind": "Identifier",
 															"name": "pathToAnalyse",
-															"pos": 729,
-															"start": 729
+															"pos": 780,
+															"start": 780
 														}
 													]
 												},
 												{
-													"end": 751,
+													"end": 802,
 													"kind": "Parameter",
 													"name": "options",
-													"pos": 743,
-													"start": 744,
+													"pos": 794,
+													"start": 795,
 													"children": [
 														{
-															"end": 751,
+															"end": 802,
 															"kind": "Identifier",
 															"name": "options",
-															"pos": 743,
-															"start": 744
+															"pos": 794,
+															"start": 795
 														}
 													]
 												},
 												{
-													"end": 755,
+													"end": 806,
 													"kind": "EqualsGreaterThanToken",
-													"pos": 752,
-													"start": 753
+													"pos": 803,
+													"start": 804
 												},
 												{
-													"end": 1710,
+													"end": 1886,
 													"kind": "Block",
-													"pos": 755,
-													"start": 756,
+													"pos": 806,
+													"start": 807,
 													"children": [
 														{
-															"end": 940,
+															"end": 1099,
 															"kind": "Keyword",
-															"pos": 757,
-															"start": 878,
-															"children": [
-																{
-																	"end": 939,
-																	"kind": "VariableDeclarationList",
-																	"pos": 757,
-																	"start": 878,
-																	"children": [
-																		{
-																			"end": 939,
-																			"kind": "VariableDeclaration",
-																			"pos": 883,
-																			"start": 884,
-																			"children": [
-																				{
-																					"end": 898,
-																					"kind": "Identifier",
-																					"name": "subCommandPath",
-																					"pos": 883,
-																					"start": 884
-																				},
-																				{
-																					"end": 939,
-																					"kind": "TemplateExpression",
-																					"pos": 900,
-																					"start": 901,
-																					"children": [
-																						{
-																							"end": 904,
-																							"kind": "TemplateHead",
-																							"pos": 900,
-																							"start": 901
-																						},
-																						{
-																							"end": 939,
-																							"kind": "TemplateSpan",
-																							"pos": 904,
-																							"start": 904,
-																							"children": [
-																								{
-																									"end": 913,
-																									"kind": "Identifier",
-																									"name": "___dirname",
-																									"pos": 904,
-																									"start": 904
-																								},
-																								{
-																									"end": 939,
-																									"kind": "TemplateTail",
-																									"pos": 913,
-																									"start": 913
-																								}
-																							]
-																						}
-																					]
-																				}
-																			]
-																		}
-																	]
-																}
-															]
-														},
-														{
-															"end": 1093,
-															"kind": "Keyword",
-															"pos": 940,
+															"pos": 808,
 															"start": 1022,
 															"children": [
 																{
-																	"end": 1092,
+																	"end": 1098,
 																	"kind": "VariableDeclarationList",
-																	"pos": 940,
+																	"pos": 808,
 																	"start": 1022,
 																	"children": [
 																		{
-																			"end": 1092,
+																			"end": 1098,
 																			"kind": "VariableDeclaration",
 																			"pos": 1027,
 																			"start": 1028,
 																			"children": [
 																				{
-																					"end": 1041,
+																					"end": 1042,
 																					"kind": "Identifier",
-																					"name": "subCommandPkg",
+																					"name": "subCommandPath",
 																					"pos": 1027,
 																					"start": 1028
 																				},
 																				{
-																					"end": 1092,
-																					"kind": "CallExpression",
-																					"pos": 1043,
-																					"start": 1044,
+																					"end": 1098,
+																					"kind": "TemplateExpression",
+																					"pos": 1044,
+																					"start": 1045,
 																					"children": [
 																						{
-																							"end": 1051,
-																							"kind": "Identifier",
-																							"name": "require",
-																							"pos": 1043,
-																							"start": 1044,
-																							"type": "function"
+																							"end": 1048,
+																							"kind": "TemplateHead",
+																							"pos": 1044,
+																							"start": 1045
 																						},
 																						{
-																							"end": 1091,
-																							"kind": "TemplateExpression",
-																							"pos": 1052,
-																							"start": 1052,
+																							"end": 1060,
+																							"kind": "TemplateSpan",
+																							"pos": 1048,
+																							"start": 1048,
 																							"children": [
 																								{
-																									"end": 1055,
-																									"kind": "TemplateHead",
-																									"pos": 1052,
-																									"start": 1052
+																									"end": 1057,
+																									"kind": "Identifier",
+																									"name": "___dirname",
+																									"pos": 1048,
+																									"start": 1048
 																								},
 																								{
-																									"end": 1091,
-																									"kind": "TemplateSpan",
-																									"pos": 1055,
-																									"start": 1055,
+																									"end": 1060,
+																									"kind": "TemplateMiddle",
+																									"pos": 1057,
+																									"start": 1057
+																								}
+																							]
+																						},
+																						{
+																							"end": 1098,
+																							"kind": "TemplateSpan",
+																							"pos": 1060,
+																							"start": 1060,
+																							"children": [
+																								{
+																									"end": 1096,
+																									"kind": "CallExpression",
+																									"pos": 1060,
+																									"start": 1060,
 																									"children": [
 																										{
-																											"end": 1069,
+																											"end": 1072,
 																											"kind": "Identifier",
-																											"name": "subCommandPath",
-																											"pos": 1055,
-																											"start": 1055
+																											"name": "platformPath",
+																											"pos": 1060,
+																											"start": 1060,
+																											"type": "function"
 																										},
 																										{
-																											"end": 1091,
-																											"kind": "TemplateTail",
-																											"pos": 1069,
-																											"start": 1069
+																											"end": 1095,
+																											"kind": "NoSubstitutionTemplateLiteral",
+																											"pos": 1073,
+																											"start": 1073
 																										}
 																									]
+																								},
+																								{
+																									"end": 1098,
+																									"kind": "TemplateTail",
+																									"pos": 1096,
+																									"start": 1096
 																								}
 																							]
 																						}
@@ -850,513 +849,631 @@
 															]
 														},
 														{
-															"end": 1268,
+															"end": 1266,
 															"kind": "ExpressionStatement",
-															"pos": 1093,
-															"start": 1183,
+															"pos": 1099,
+															"start": 1181,
 															"children": [
 																{
-																	"end": 1267,
+																	"end": 1265,
 																	"kind": "CallExpression",
-																	"pos": 1093,
-																	"start": 1183,
+																	"pos": 1099,
+																	"start": 1181,
 																	"children": [
 																		{
-																			"end": 1194,
+																			"end": 1192,
 																			"kind": "PropertyAccessExpression",
-																			"pos": 1093,
-																			"start": 1183,
+																			"pos": 1099,
+																			"start": 1181,
 																			"children": [
 																				{
-																					"end": 1190,
+																					"end": 1188,
 																					"kind": "Identifier",
 																					"name": "console",
-																					"pos": 1093,
-																					"start": 1183
+																					"pos": 1099,
+																					"start": 1181
 																				},
 																				{
-																					"end": 1194,
+																					"end": 1192,
 																					"kind": "Identifier",
 																					"name": "log",
-																					"pos": 1191,
-																					"start": 1191,
+																					"pos": 1189,
+																					"start": 1189,
 																					"type": "function"
 																				}
 																			]
 																		},
 																		{
-																			"end": 1250,
+																			"end": 1248,
 																			"kind": "CallExpression",
-																			"pos": 1195,
-																			"start": 1195,
+																			"pos": 1193,
+																			"start": 1193,
 																			"children": [
 																				{
-																					"end": 1214,
+																					"end": 1212,
 																					"kind": "PropertyAccessExpression",
-																					"pos": 1195,
-																					"start": 1195,
+																					"pos": 1193,
+																					"start": 1193,
 																					"children": [
 																						{
-																							"end": 1200,
+																							"end": 1198,
 																							"kind": "Identifier",
 																							"name": "chalk",
-																							"pos": 1195,
-																							"start": 1195
+																							"pos": 1193,
+																							"start": 1193
 																						},
 																						{
-																							"end": 1214,
+																							"end": 1212,
 																							"kind": "Identifier",
 																							"name": "magentaBright",
-																							"pos": 1201,
-																							"start": 1201,
+																							"pos": 1199,
+																							"start": 1199,
 																							"type": "function"
 																						}
 																					]
 																				},
 																				{
-																					"end": 1249,
+																					"end": 1247,
 																					"kind": "Literal",
-																					"pos": 1215,
-																					"start": 1215
+																					"pos": 1213,
+																					"start": 1213
 																				}
 																			]
 																		},
 																		{
-																			"end": 1266,
+																			"end": 1264,
 																			"kind": "Identifier",
 																			"name": "subCommandPath",
-																			"pos": 1251,
-																			"start": 1252
+																			"pos": 1249,
+																			"start": 1250
 																		}
 																	]
 																}
 															]
 														},
 														{
-															"end": 1360,
-															"kind": "ExpressionStatement",
-															"pos": 1268,
-															"start": 1277,
+															"end": 1363,
+															"kind": "Keyword",
+															"pos": 1266,
+															"start": 1275,
 															"children": [
 																{
-																	"end": 1359,
-																	"kind": "CallExpression",
-																	"pos": 1268,
-																	"start": 1277,
+																	"end": 1362,
+																	"kind": "VariableDeclarationList",
+																	"pos": 1266,
+																	"start": 1275,
 																	"children": [
 																		{
-																			"end": 1288,
-																			"kind": "PropertyAccessExpression",
-																			"pos": 1268,
-																			"start": 1277,
+																			"end": 1362,
+																			"kind": "VariableDeclaration",
+																			"pos": 1280,
+																			"start": 1281,
 																			"children": [
 																				{
-																					"end": 1284,
+																					"end": 1294,
 																					"kind": "Identifier",
-																					"name": "console",
-																					"pos": 1268,
-																					"start": 1277
+																					"name": "subCommandPkg",
+																					"pos": 1280,
+																					"start": 1281
 																				},
 																				{
-																					"end": 1288,
+																					"end": 1362,
+																					"kind": "CallExpression",
+																					"pos": 1296,
+																					"start": 1297,
+																					"children": [
+																						{
+																							"end": 1304,
+																							"kind": "Identifier",
+																							"name": "require",
+																							"pos": 1296,
+																							"start": 1297,
+																							"type": "function"
+																						},
+																						{
+																							"end": 1361,
+																							"kind": "TemplateExpression",
+																							"pos": 1305,
+																							"start": 1305,
+																							"children": [
+																								{
+																									"end": 1308,
+																									"kind": "TemplateHead",
+																									"pos": 1305,
+																									"start": 1305
+																								},
+																								{
+																									"end": 1325,
+																									"kind": "TemplateSpan",
+																									"pos": 1308,
+																									"start": 1308,
+																									"children": [
+																										{
+																											"end": 1322,
+																											"kind": "Identifier",
+																											"name": "subCommandPath",
+																											"pos": 1308,
+																											"start": 1308
+																										},
+																										{
+																											"end": 1325,
+																											"kind": "TemplateMiddle",
+																											"pos": 1322,
+																											"start": 1322
+																										}
+																									]
+																								},
+																								{
+																									"end": 1361,
+																									"kind": "TemplateSpan",
+																									"pos": 1325,
+																									"start": 1325,
+																									"children": [
+																										{
+																											"end": 1359,
+																											"kind": "CallExpression",
+																											"pos": 1325,
+																											"start": 1325,
+																											"children": [
+																												{
+																													"end": 1337,
+																													"kind": "Identifier",
+																													"name": "platformPath",
+																													"pos": 1325,
+																													"start": 1325,
+																													"type": "function"
+																												},
+																												{
+																													"end": 1358,
+																													"kind": "NoSubstitutionTemplateLiteral",
+																													"pos": 1338,
+																													"start": 1338
+																												}
+																											]
+																										},
+																										{
+																											"end": 1361,
+																											"kind": "TemplateTail",
+																											"pos": 1359,
+																											"start": 1359
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 1536,
+															"kind": "ExpressionStatement",
+															"pos": 1363,
+															"start": 1453,
+															"children": [
+																{
+																	"end": 1535,
+																	"kind": "CallExpression",
+																	"pos": 1363,
+																	"start": 1453,
+																	"children": [
+																		{
+																			"end": 1464,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 1363,
+																			"start": 1453,
+																			"children": [
+																				{
+																					"end": 1460,
+																					"kind": "Identifier",
+																					"name": "console",
+																					"pos": 1363,
+																					"start": 1453
+																				},
+																				{
+																					"end": 1464,
 																					"kind": "Identifier",
 																					"name": "log",
-																					"pos": 1285,
-																					"start": 1285,
+																					"pos": 1461,
+																					"start": 1461,
 																					"type": "function"
 																				}
 																			]
 																		},
 																		{
-																			"end": 1343,
+																			"end": 1519,
 																			"kind": "CallExpression",
-																			"pos": 1289,
-																			"start": 1289,
+																			"pos": 1465,
+																			"start": 1465,
 																			"children": [
 																				{
-																					"end": 1308,
+																					"end": 1484,
 																					"kind": "PropertyAccessExpression",
-																					"pos": 1289,
-																					"start": 1289,
+																					"pos": 1465,
+																					"start": 1465,
 																					"children": [
 																						{
-																							"end": 1294,
+																							"end": 1470,
 																							"kind": "Identifier",
 																							"name": "chalk",
-																							"pos": 1289,
-																							"start": 1289
-																						},
-																						{
-																							"end": 1308,
-																							"kind": "Identifier",
-																							"name": "magentaBright",
-																							"pos": 1295,
-																							"start": 1295,
-																							"type": "function"
-																						}
-																					]
-																				},
-																				{
-																					"end": 1342,
-																					"kind": "Literal",
-																					"pos": 1309,
-																					"start": 1309
-																				}
-																			]
-																		},
-																		{
-																			"end": 1358,
-																			"kind": "Identifier",
-																			"name": "subCommandPkg",
-																			"pos": 1344,
-																			"start": 1345
-																		}
-																	]
-																}
-															]
-														},
-														{
-															"end": 1704,
-															"kind": "ExpressionStatement",
-															"pos": 1360,
-															"start": 1369,
-															"children": [
-																{
-																	"end": 1703,
-																	"kind": "CallExpression",
-																	"pos": 1360,
-																	"start": 1369,
-																	"children": [
-																		{
-																			"end": 1374,
-																			"kind": "Identifier",
-																			"name": "spawn",
-																			"pos": 1360,
-																			"start": 1369,
-																			"type": "function"
-																		},
-																		{
-																			"end": 1381,
-																			"kind": "Literal",
-																			"pos": 1375,
-																			"start": 1375
-																		},
-																		{
-																			"end": 1636,
-																			"kind": "ArrayLiteralExpression",
-																			"pos": 1382,
-																			"start": 1383,
-																			"children": [
-																				{
-																					"end": 1437,
-																					"kind": "TemplateExpression",
-																					"pos": 1384,
-																					"start": 1397,
-																					"children": [
-																						{
-																							"end": 1400,
-																							"kind": "TemplateHead",
-																							"pos": 1384,
-																							"start": 1397
-																						},
-																						{
-																							"end": 1418,
-																							"kind": "TemplateSpan",
-																							"pos": 1400,
-																							"start": 1400,
-																							"children": [
-																								{
-																									"end": 1414,
-																									"kind": "Identifier",
-																									"name": "subCommandPath",
-																									"pos": 1400,
-																									"start": 1400
-																								},
-																								{
-																									"end": 1418,
-																									"kind": "TemplateMiddle",
-																									"pos": 1414,
-																									"start": 1414
-																								}
-																							]
-																						},
-																						{
-																							"end": 1437,
-																							"kind": "TemplateSpan",
-																							"pos": 1418,
-																							"start": 1418,
-																							"children": [
-																								{
-																									"end": 1435,
-																									"kind": "PropertyAccessExpression",
-																									"pos": 1418,
-																									"start": 1418,
-																									"children": [
-																										{
-																											"end": 1431,
-																											"kind": "Identifier",
-																											"name": "subCommandPkg",
-																											"pos": 1418,
-																											"start": 1418
-																										},
-																										{
-																											"end": 1435,
-																											"kind": "Identifier",
-																											"name": "bin",
-																											"pos": 1432,
-																											"start": 1432
-																										}
-																									]
-																								},
-																								{
-																									"end": 1437,
-																									"kind": "TemplateTail",
-																									"pos": 1435,
-																									"start": 1435
-																								}
-																							]
-																						}
-																					]
-																				},
-																				{
-																					"end": 1471,
-																					"kind": "BinaryExpression",
-																					"pos": 1438,
-																					"start": 1451,
-																					"children": [
-																						{
-																							"end": 1464,
-																							"kind": "Identifier",
-																							"name": "pathToAnalyse",
-																							"pos": 1438,
-																							"start": 1451
-																						},
-																						{
-																							"end": 1467,
-																							"kind": "QuestionQuestionToken",
-																							"pos": 1464,
+																							"pos": 1465,
 																							"start": 1465
 																						},
 																						{
-																							"end": 1471,
-																							"kind": "Literal",
-																							"pos": 1467,
-																							"start": 1468
+																							"end": 1484,
+																							"kind": "Identifier",
+																							"name": "magentaBright",
+																							"pos": 1471,
+																							"start": 1471,
+																							"type": "function"
 																						}
 																					]
 																				},
 																				{
-																					"end": 1510,
-																					"kind": "BinaryExpression",
-																					"pos": 1472,
-																					"start": 1485,
+																					"end": 1518,
+																					"kind": "Literal",
+																					"pos": 1485,
+																					"start": 1485
+																				}
+																			]
+																		},
+																		{
+																			"end": 1534,
+																			"kind": "Identifier",
+																			"name": "subCommandPkg",
+																			"pos": 1520,
+																			"start": 1521
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 1880,
+															"kind": "ExpressionStatement",
+															"pos": 1536,
+															"start": 1545,
+															"children": [
+																{
+																	"end": 1879,
+																	"kind": "CallExpression",
+																	"pos": 1536,
+																	"start": 1545,
+																	"children": [
+																		{
+																			"end": 1550,
+																			"kind": "Identifier",
+																			"name": "spawn",
+																			"pos": 1536,
+																			"start": 1545,
+																			"type": "function"
+																		},
+																		{
+																			"end": 1557,
+																			"kind": "Literal",
+																			"pos": 1551,
+																			"start": 1551
+																		},
+																		{
+																			"end": 1812,
+																			"kind": "ArrayLiteralExpression",
+																			"pos": 1558,
+																			"start": 1559,
+																			"children": [
+																				{
+																					"end": 1613,
+																					"kind": "TemplateExpression",
+																					"pos": 1560,
+																					"start": 1573,
 																					"children": [
 																						{
-																							"end": 1501,
-																							"kind": "PropertyAccessExpression",
-																							"pos": 1472,
-																							"start": 1485,
+																							"end": 1576,
+																							"kind": "TemplateHead",
+																							"pos": 1560,
+																							"start": 1573
+																						},
+																						{
+																							"end": 1594,
+																							"kind": "TemplateSpan",
+																							"pos": 1576,
+																							"start": 1576,
 																							"children": [
 																								{
-																									"end": 1492,
+																									"end": 1590,
 																									"kind": "Identifier",
-																									"name": "options",
-																									"pos": 1472,
-																									"start": 1485
+																									"name": "subCommandPath",
+																									"pos": 1576,
+																									"start": 1576
 																								},
 																								{
-																									"end": 1501,
+																									"end": 1594,
+																									"kind": "TemplateMiddle",
+																									"pos": 1590,
+																									"start": 1590
+																								}
+																							]
+																						},
+																						{
+																							"end": 1613,
+																							"kind": "TemplateSpan",
+																							"pos": 1594,
+																							"start": 1594,
+																							"children": [
+																								{
+																									"end": 1611,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 1594,
+																									"start": 1594,
+																									"children": [
+																										{
+																											"end": 1607,
+																											"kind": "Identifier",
+																											"name": "subCommandPkg",
+																											"pos": 1594,
+																											"start": 1594
+																										},
+																										{
+																											"end": 1611,
+																											"kind": "Identifier",
+																											"name": "bin",
+																											"pos": 1608,
+																											"start": 1608
+																										}
+																									]
+																								},
+																								{
+																									"end": 1613,
+																									"kind": "TemplateTail",
+																									"pos": 1611,
+																									"start": 1611
+																								}
+																							]
+																						}
+																					]
+																				},
+																				{
+																					"end": 1647,
+																					"kind": "BinaryExpression",
+																					"pos": 1614,
+																					"start": 1627,
+																					"children": [
+																						{
+																							"end": 1640,
+																							"kind": "Identifier",
+																							"name": "pathToAnalyse",
+																							"pos": 1614,
+																							"start": 1627
+																						},
+																						{
+																							"end": 1643,
+																							"kind": "QuestionQuestionToken",
+																							"pos": 1640,
+																							"start": 1641
+																						},
+																						{
+																							"end": 1647,
+																							"kind": "Literal",
+																							"pos": 1643,
+																							"start": 1644
+																						}
+																					]
+																				},
+																				{
+																					"end": 1686,
+																					"kind": "BinaryExpression",
+																					"pos": 1648,
+																					"start": 1661,
+																					"children": [
+																						{
+																							"end": 1677,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 1648,
+																							"start": 1661,
+																							"children": [
+																								{
+																									"end": 1668,
+																									"kind": "Identifier",
+																									"name": "options",
+																									"pos": 1648,
+																									"start": 1661
+																								},
+																								{
+																									"end": 1677,
 																									"kind": "Identifier",
 																									"name": "language",
-																									"pos": 1493,
-																									"start": 1493
+																									"pos": 1669,
+																									"start": 1669
 																								}
 																							]
 																						},
 																						{
-																							"end": 1504,
+																							"end": 1680,
 																							"kind": "QuestionQuestionToken",
-																							"pos": 1501,
-																							"start": 1502
+																							"pos": 1677,
+																							"start": 1678
 																						},
 																						{
-																							"end": 1510,
+																							"end": 1686,
 																							"kind": "Keyword",
-																							"pos": 1504,
-																							"start": 1505
+																							"pos": 1680,
+																							"start": 1681
 																						}
 																					]
 																				},
 																				{
-																					"end": 1549,
+																					"end": 1725,
 																					"kind": "BinaryExpression",
-																					"pos": 1511,
-																					"start": 1524,
+																					"pos": 1687,
+																					"start": 1700,
 																					"children": [
 																						{
-																							"end": 1540,
+																							"end": 1716,
 																							"kind": "PropertyAccessExpression",
-																							"pos": 1511,
-																							"start": 1524,
+																							"pos": 1687,
+																							"start": 1700,
 																							"children": [
 																								{
-																									"end": 1531,
+																									"end": 1707,
 																									"kind": "Identifier",
 																									"name": "options",
-																									"pos": 1511,
-																									"start": 1524
+																									"pos": 1687,
+																									"start": 1700
 																								},
 																								{
-																									"end": 1540,
+																									"end": 1716,
 																									"kind": "Identifier",
 																									"name": "markdown",
-																									"pos": 1532,
-																									"start": 1532
+																									"pos": 1708,
+																									"start": 1708
 																								}
 																							]
 																						},
 																						{
-																							"end": 1543,
+																							"end": 1719,
 																							"kind": "QuestionQuestionToken",
-																							"pos": 1540,
-																							"start": 1541
+																							"pos": 1716,
+																							"start": 1717
 																						},
 																						{
-																							"end": 1549,
+																							"end": 1725,
 																							"kind": "Keyword",
-																							"pos": 1543,
-																							"start": 1544
+																							"pos": 1719,
+																							"start": 1720
 																						}
 																					]
 																				},
 																				{
-																					"end": 1587,
+																					"end": 1763,
 																					"kind": "BinaryExpression",
-																					"pos": 1550,
-																					"start": 1563,
+																					"pos": 1726,
+																					"start": 1739,
 																					"children": [
 																						{
-																							"end": 1578,
+																							"end": 1754,
 																							"kind": "PropertyAccessExpression",
-																							"pos": 1550,
-																							"start": 1563,
+																							"pos": 1726,
+																							"start": 1739,
 																							"children": [
 																								{
-																									"end": 1570,
+																									"end": 1746,
 																									"kind": "Identifier",
 																									"name": "options",
-																									"pos": 1550,
-																									"start": 1563
+																									"pos": 1726,
+																									"start": 1739
 																								},
 																								{
-																									"end": 1578,
+																									"end": 1754,
 																									"kind": "Identifier",
 																									"name": "console",
-																									"pos": 1571,
-																									"start": 1571
+																									"pos": 1747,
+																									"start": 1747
 																								}
 																							]
 																						},
 																						{
-																							"end": 1581,
+																							"end": 1757,
 																							"kind": "QuestionQuestionToken",
-																							"pos": 1578,
-																							"start": 1579
+																							"pos": 1754,
+																							"start": 1755
 																						},
 																						{
-																							"end": 1587,
+																							"end": 1763,
 																							"kind": "Keyword",
-																							"pos": 1581,
-																							"start": 1582
+																							"pos": 1757,
+																							"start": 1758
 																						}
 																					]
 																				},
 																				{
-																					"end": 1626,
+																					"end": 1802,
 																					"kind": "BinaryExpression",
-																					"pos": 1588,
-																					"start": 1601,
+																					"pos": 1764,
+																					"start": 1777,
 																					"children": [
 																						{
-																							"end": 1617,
+																							"end": 1793,
 																							"kind": "PropertyAccessExpression",
-																							"pos": 1588,
-																							"start": 1601,
+																							"pos": 1764,
+																							"start": 1777,
 																							"children": [
 																								{
-																									"end": 1608,
+																									"end": 1784,
 																									"kind": "Identifier",
 																									"name": "options",
-																									"pos": 1588,
-																									"start": 1601
+																									"pos": 1764,
+																									"start": 1777
 																								},
 																								{
-																									"end": 1617,
+																									"end": 1793,
 																									"kind": "Identifier",
 																									"name": "refactor",
-																									"pos": 1609,
-																									"start": 1609
+																									"pos": 1785,
+																									"start": 1785
 																								}
 																							]
 																						},
 																						{
-																							"end": 1620,
+																							"end": 1796,
 																							"kind": "QuestionQuestionToken",
-																							"pos": 1617,
-																							"start": 1618
+																							"pos": 1793,
+																							"start": 1794
 																						},
 																						{
-																							"end": 1626,
+																							"end": 1802,
 																							"kind": "Keyword",
-																							"pos": 1620,
-																							"start": 1621
+																							"pos": 1796,
+																							"start": 1797
 																						}
 																					]
 																				}
 																			]
 																		},
 																		{
-																			"end": 1702,
+																			"end": 1878,
 																			"kind": "ObjectLiteralExpression",
-																			"pos": 1637,
-																			"start": 1638,
+																			"pos": 1813,
+																			"start": 1814,
 																			"children": [
 																				{
-																					"end": 1692,
+																					"end": 1868,
 																					"kind": "PropertyAssignment",
-																					"pos": 1639,
-																					"start": 1652,
+																					"pos": 1815,
+																					"start": 1828,
 																					"children": [
 																						{
-																							"end": 1657,
+																							"end": 1833,
 																							"kind": "Identifier",
 																							"name": "stdio",
-																							"pos": 1639,
-																							"start": 1652
+																							"pos": 1815,
+																							"start": 1828
 																						},
 																						{
-																							"end": 1692,
+																							"end": 1868,
 																							"kind": "ArrayLiteralExpression",
-																							"pos": 1658,
-																							"start": 1659,
+																							"pos": 1834,
+																							"start": 1835,
 																							"children": [
 																								{
-																									"end": 1669,
+																									"end": 1845,
 																									"kind": "Literal",
-																									"pos": 1660,
-																									"start": 1660
+																									"pos": 1836,
+																									"start": 1836
 																								},
 																								{
-																									"end": 1680,
+																									"end": 1856,
 																									"kind": "Literal",
-																									"pos": 1670,
-																									"start": 1671
+																									"pos": 1846,
+																									"start": 1847
 																								},
 																								{
-																									"end": 1691,
+																									"end": 1867,
 																									"kind": "Literal",
-																									"pos": 1681,
-																									"start": 1682
+																									"pos": 1857,
+																									"start": 1858
 																								}
 																							]
 																						}
@@ -1377,369 +1494,369 @@
 							]
 						},
 						{
-							"end": 2614,
+							"end": 2790,
 							"kind": "ExpressionStatement",
-							"pos": 1712,
-							"start": 1714,
+							"pos": 1888,
+							"start": 1890,
 							"children": [
 								{
-									"end": 2614,
+									"end": 2790,
 									"kind": "CallExpression",
-									"pos": 1712,
-									"start": 1714,
+									"pos": 1888,
+									"start": 1890,
 									"children": [
 										{
-											"end": 2081,
+											"end": 2257,
 											"kind": "PropertyAccessExpression",
-											"pos": 1712,
-											"start": 1714,
+											"pos": 1888,
+											"start": 1890,
 											"children": [
 												{
-													"end": 2069,
+													"end": 2245,
 													"kind": "CallExpression",
-													"pos": 1712,
-													"start": 1714,
+													"pos": 1888,
+													"start": 1890,
 													"children": [
 														{
-															"end": 2050,
+															"end": 2226,
 															"kind": "PropertyAccessExpression",
-															"pos": 1712,
-															"start": 1714,
+															"pos": 1888,
+															"start": 1890,
 															"children": [
 																{
-																	"end": 2038,
+																	"end": 2214,
 																	"kind": "CallExpression",
-																	"pos": 1712,
-																	"start": 1714,
+																	"pos": 1888,
+																	"start": 1890,
 																	"children": [
 																		{
-																			"end": 2001,
+																			"end": 2177,
 																			"kind": "PropertyAccessExpression",
-																			"pos": 1712,
-																			"start": 1714,
+																			"pos": 1888,
+																			"start": 1890,
 																			"children": [
 																				{
-																					"end": 1989,
+																					"end": 2165,
 																					"kind": "CallExpression",
-																					"pos": 1712,
-																					"start": 1714,
+																					"pos": 1888,
+																					"start": 1890,
 																					"children": [
 																						{
-																							"end": 1950,
+																							"end": 2126,
 																							"kind": "PropertyAccessExpression",
-																							"pos": 1712,
-																							"start": 1714,
+																							"pos": 1888,
+																							"start": 1890,
 																							"children": [
 																								{
-																									"end": 1938,
+																									"end": 2114,
 																									"kind": "CallExpression",
-																									"pos": 1712,
-																									"start": 1714,
+																									"pos": 1888,
+																									"start": 1890,
 																									"children": [
 																										{
-																											"end": 1897,
+																											"end": 2073,
 																											"kind": "PropertyAccessExpression",
-																											"pos": 1712,
-																											"start": 1714,
+																											"pos": 1888,
+																											"start": 1890,
 																											"children": [
 																												{
-																													"end": 1885,
+																													"end": 2061,
 																													"kind": "CallExpression",
-																													"pos": 1712,
-																													"start": 1714,
+																													"pos": 1888,
+																													"start": 1890,
 																													"children": [
 																														{
-																															"end": 1842,
+																															"end": 2018,
 																															"kind": "PropertyAccessExpression",
-																															"pos": 1712,
-																															"start": 1714,
+																															"pos": 1888,
+																															"start": 1890,
 																															"children": [
 																																{
-																																	"end": 1830,
+																																	"end": 2006,
 																																	"kind": "CallExpression",
-																																	"pos": 1712,
-																																	"start": 1714,
+																																	"pos": 1888,
+																																	"start": 1890,
 																																	"children": [
 																																		{
-																																			"end": 1799,
+																																			"end": 1975,
 																																			"kind": "PropertyAccessExpression",
-																																			"pos": 1712,
-																																			"start": 1714,
+																																			"pos": 1888,
+																																			"start": 1890,
 																																			"children": [
 																																				{
-																																					"end": 1787,
+																																					"end": 1963,
 																																					"kind": "CallExpression",
-																																					"pos": 1712,
-																																					"start": 1714,
+																																					"pos": 1888,
+																																					"start": 1890,
 																																					"children": [
 																																						{
-																																							"end": 1753,
+																																							"end": 1929,
 																																							"kind": "PropertyAccessExpression",
-																																							"pos": 1712,
-																																							"start": 1714,
+																																							"pos": 1888,
+																																							"start": 1890,
 																																							"children": [
 																																								{
-																																									"end": 1736,
+																																									"end": 1912,
 																																									"kind": "CallExpression",
-																																									"pos": 1712,
-																																									"start": 1714,
+																																									"pos": 1888,
+																																									"start": 1890,
 																																									"children": [
 																																										{
-																																											"end": 1729,
+																																											"end": 1905,
 																																											"kind": "PropertyAccessExpression",
-																																											"pos": 1712,
-																																											"start": 1714,
+																																											"pos": 1888,
+																																											"start": 1890,
 																																											"children": [
 																																												{
-																																													"end": 1721,
+																																													"end": 1897,
 																																													"kind": "Identifier",
 																																													"name": "program",
-																																													"pos": 1712,
-																																													"start": 1714
+																																													"pos": 1888,
+																																													"start": 1890
 																																												},
 																																												{
-																																													"end": 1729,
+																																													"end": 1905,
 																																													"kind": "Identifier",
 																																													"name": "command",
-																																													"pos": 1722,
-																																													"start": 1722,
+																																													"pos": 1898,
+																																													"start": 1898,
 																																													"type": "function"
 																																												}
 																																											]
 																																										},
 																																										{
-																																											"end": 1735,
+																																											"end": 1911,
 																																											"kind": "Literal",
-																																											"pos": 1730,
-																																											"start": 1730
+																																											"pos": 1906,
+																																											"start": 1906
 																																										}
 																																									]
 																																								},
 																																								{
-																																									"end": 1753,
+																																									"end": 1929,
 																																									"kind": "Identifier",
 																																									"name": "description",
-																																									"pos": 1742,
-																																									"start": 1742,
+																																									"pos": 1918,
+																																									"start": 1918,
 																																									"type": "function"
 																																								}
 																																							]
 																																						},
 																																						{
-																																							"end": 1786,
+																																							"end": 1962,
 																																							"kind": "Literal",
-																																							"pos": 1754,
-																																							"start": 1754
+																																							"pos": 1930,
+																																							"start": 1930
 																																						}
 																																					]
 																																				},
 																																				{
-																																					"end": 1799,
+																																					"end": 1975,
 																																					"kind": "Identifier",
 																																					"name": "option",
-																																					"pos": 1793,
-																																					"start": 1793,
+																																					"pos": 1969,
+																																					"start": 1969,
 																																					"type": "function"
 																																				}
 																																			]
 																																		},
 																																		{
-																																			"end": 1829,
+																																			"end": 2005,
 																																			"kind": "Literal",
-																																			"pos": 1800,
-																																			"start": 1800
+																																			"pos": 1976,
+																																			"start": 1976
 																																		}
 																																	]
 																																},
 																																{
-																																	"end": 1842,
+																																	"end": 2018,
 																																	"kind": "Identifier",
 																																	"name": "option",
-																																	"pos": 1836,
-																																	"start": 1836,
+																																	"pos": 2012,
+																																	"start": 2012,
 																																	"type": "function"
 																																}
 																															]
 																														},
 																														{
-																															"end": 1884,
+																															"end": 2060,
 																															"kind": "Literal",
-																															"pos": 1843,
-																															"start": 1843
+																															"pos": 2019,
+																															"start": 2019
 																														}
 																													]
 																												},
 																												{
-																													"end": 1897,
+																													"end": 2073,
 																													"kind": "Identifier",
 																													"name": "option",
-																													"pos": 1891,
-																													"start": 1891,
+																													"pos": 2067,
+																													"start": 2067,
 																													"type": "function"
 																												}
 																											]
 																										},
 																										{
-																											"end": 1937,
+																											"end": 2113,
 																											"kind": "Literal",
-																											"pos": 1898,
-																											"start": 1898
+																											"pos": 2074,
+																											"start": 2074
 																										}
 																									]
 																								},
 																								{
-																									"end": 1950,
+																									"end": 2126,
 																									"kind": "Identifier",
 																									"name": "option",
-																									"pos": 1944,
-																									"start": 1944,
+																									"pos": 2120,
+																									"start": 2120,
 																									"type": "function"
 																								}
 																							]
 																						},
 																						{
-																							"end": 1988,
+																							"end": 2164,
 																							"kind": "Literal",
-																							"pos": 1951,
-																							"start": 1951
+																							"pos": 2127,
+																							"start": 2127
 																						}
 																					]
 																				},
 																				{
-																					"end": 2001,
+																					"end": 2177,
 																					"kind": "Identifier",
 																					"name": "option",
-																					"pos": 1995,
-																					"start": 1995,
+																					"pos": 2171,
+																					"start": 2171,
 																					"type": "function"
 																				}
 																			]
 																		},
 																		{
-																			"end": 2037,
+																			"end": 2213,
 																			"kind": "Literal",
-																			"pos": 2002,
-																			"start": 2002
+																			"pos": 2178,
+																			"start": 2178
 																		}
 																	]
 																},
 																{
-																	"end": 2050,
+																	"end": 2226,
 																	"kind": "Identifier",
 																	"name": "option",
-																	"pos": 2044,
-																	"start": 2044,
+																	"pos": 2220,
+																	"start": 2220,
 																	"type": "function"
 																}
 															]
 														},
 														{
-															"end": 2068,
+															"end": 2244,
 															"kind": "Literal",
-															"pos": 2051,
-															"start": 2051
+															"pos": 2227,
+															"start": 2227
 														}
 													]
 												},
 												{
-													"end": 2081,
+													"end": 2257,
 													"kind": "Identifier",
 													"name": "action",
-													"pos": 2075,
-													"start": 2075,
+													"pos": 2251,
+													"start": 2251,
 													"type": "function"
 												}
 											]
 										},
 										{
-											"end": 2613,
+											"end": 2789,
 											"kind": "ArrowFunction",
-											"pos": 2082,
-											"start": 2082,
+											"pos": 2258,
+											"start": 2258,
 											"children": [
 												{
-													"end": 2090,
+													"end": 2266,
 													"kind": "Parameter",
 													"name": "options",
-													"pos": 2083,
-													"start": 2083,
+													"pos": 2259,
+													"start": 2259,
 													"children": [
 														{
-															"end": 2090,
+															"end": 2266,
 															"kind": "Identifier",
 															"name": "options",
-															"pos": 2083,
-															"start": 2083
+															"pos": 2259,
+															"start": 2259
 														}
 													]
 												},
 												{
-													"end": 2094,
+													"end": 2270,
 													"kind": "EqualsGreaterThanToken",
-													"pos": 2091,
-													"start": 2092
+													"pos": 2267,
+													"start": 2268
 												},
 												{
-													"end": 2613,
+													"end": 2789,
 													"kind": "Block",
-													"pos": 2094,
-													"start": 2095,
+													"pos": 2270,
+													"start": 2271,
 													"children": [
 														{
-															"end": 2156,
+															"end": 2332,
 															"kind": "Keyword",
-															"pos": 2096,
-															"start": 2105,
+															"pos": 2272,
+															"start": 2281,
 															"children": [
 																{
-																	"end": 2155,
+																	"end": 2331,
 																	"kind": "VariableDeclarationList",
-																	"pos": 2096,
-																	"start": 2105,
+																	"pos": 2272,
+																	"start": 2281,
 																	"children": [
 																		{
-																			"end": 2155,
+																			"end": 2331,
 																			"kind": "VariableDeclaration",
-																			"pos": 2110,
-																			"start": 2111,
+																			"pos": 2286,
+																			"start": 2287,
 																			"children": [
 																				{
-																					"end": 2125,
+																					"end": 2301,
 																					"kind": "Identifier",
 																					"name": "subCommandPath",
-																					"pos": 2110,
-																					"start": 2111
+																					"pos": 2286,
+																					"start": 2287
 																				},
 																				{
-																					"end": 2155,
+																					"end": 2331,
 																					"kind": "TemplateExpression",
-																					"pos": 2127,
-																					"start": 2128,
+																					"pos": 2303,
+																					"start": 2304,
 																					"children": [
 																						{
-																							"end": 2131,
+																							"end": 2307,
 																							"kind": "TemplateHead",
-																							"pos": 2127,
-																							"start": 2128
+																							"pos": 2303,
+																							"start": 2304
 																						},
 																						{
-																							"end": 2155,
+																							"end": 2331,
 																							"kind": "TemplateSpan",
-																							"pos": 2131,
-																							"start": 2131,
+																							"pos": 2307,
+																							"start": 2307,
 																							"children": [
 																								{
-																									"end": 2140,
+																									"end": 2316,
 																									"kind": "Identifier",
 																									"name": "___dirname",
-																									"pos": 2131,
-																									"start": 2131
+																									"pos": 2307,
+																									"start": 2307
 																								},
 																								{
-																									"end": 2155,
+																									"end": 2331,
 																									"kind": "TemplateTail",
-																									"pos": 2140,
-																									"start": 2140
+																									"pos": 2316,
+																									"start": 2316
 																								}
 																							]
 																						}
@@ -1752,74 +1869,74 @@
 															]
 														},
 														{
-															"end": 2234,
+															"end": 2410,
 															"kind": "Keyword",
-															"pos": 2156,
-															"start": 2165,
+															"pos": 2332,
+															"start": 2341,
 															"children": [
 																{
-																	"end": 2233,
+																	"end": 2409,
 																	"kind": "VariableDeclarationList",
-																	"pos": 2156,
-																	"start": 2165,
+																	"pos": 2332,
+																	"start": 2341,
 																	"children": [
 																		{
-																			"end": 2233,
+																			"end": 2409,
 																			"kind": "VariableDeclaration",
-																			"pos": 2170,
-																			"start": 2171,
+																			"pos": 2346,
+																			"start": 2347,
 																			"children": [
 																				{
-																					"end": 2184,
+																					"end": 2360,
 																					"kind": "Identifier",
 																					"name": "subCommandPkg",
-																					"pos": 2170,
-																					"start": 2171
+																					"pos": 2346,
+																					"start": 2347
 																				},
 																				{
-																					"end": 2233,
+																					"end": 2409,
 																					"kind": "CallExpression",
-																					"pos": 2186,
-																					"start": 2187,
+																					"pos": 2362,
+																					"start": 2363,
 																					"children": [
 																						{
-																							"end": 2194,
+																							"end": 2370,
 																							"kind": "Identifier",
 																							"name": "require",
-																							"pos": 2186,
-																							"start": 2187,
+																							"pos": 2362,
+																							"start": 2363,
 																							"type": "function"
 																						},
 																						{
-																							"end": 2232,
+																							"end": 2408,
 																							"kind": "TemplateExpression",
-																							"pos": 2195,
-																							"start": 2195,
+																							"pos": 2371,
+																							"start": 2371,
 																							"children": [
 																								{
-																									"end": 2198,
+																									"end": 2374,
 																									"kind": "TemplateHead",
-																									"pos": 2195,
-																									"start": 2195
+																									"pos": 2371,
+																									"start": 2371
 																								},
 																								{
-																									"end": 2232,
+																									"end": 2408,
 																									"kind": "TemplateSpan",
-																									"pos": 2198,
-																									"start": 2198,
+																									"pos": 2374,
+																									"start": 2374,
 																									"children": [
 																										{
-																											"end": 2212,
+																											"end": 2388,
 																											"kind": "Identifier",
 																											"name": "subCommandPath",
-																											"pos": 2198,
-																											"start": 2198
+																											"pos": 2374,
+																											"start": 2374
 																										},
 																										{
-																											"end": 2232,
+																											"end": 2408,
 																											"kind": "TemplateTail",
-																											"pos": 2212,
-																											"start": 2212
+																											"pos": 2388,
+																											"start": 2388
 																										}
 																									]
 																								}
@@ -1834,284 +1951,284 @@
 															]
 														},
 														{
-															"end": 2607,
+															"end": 2783,
 															"kind": "ExpressionStatement",
-															"pos": 2234,
-															"start": 2243,
+															"pos": 2410,
+															"start": 2419,
 															"children": [
 																{
-																	"end": 2606,
+																	"end": 2782,
 																	"kind": "CallExpression",
-																	"pos": 2234,
-																	"start": 2243,
+																	"pos": 2410,
+																	"start": 2419,
 																	"children": [
 																		{
-																			"end": 2248,
+																			"end": 2424,
 																			"kind": "Identifier",
 																			"name": "spawn",
-																			"pos": 2234,
-																			"start": 2243,
+																			"pos": 2410,
+																			"start": 2419,
 																			"type": "function"
 																		},
 																		{
-																			"end": 2255,
+																			"end": 2431,
 																			"kind": "Literal",
-																			"pos": 2249,
-																			"start": 2249
+																			"pos": 2425,
+																			"start": 2425
 																		},
 																		{
-																			"end": 2539,
+																			"end": 2715,
 																			"kind": "ArrayLiteralExpression",
-																			"pos": 2256,
-																			"start": 2257,
+																			"pos": 2432,
+																			"start": 2433,
 																			"children": [
 																				{
-																					"end": 2311,
+																					"end": 2487,
 																					"kind": "TemplateExpression",
-																					"pos": 2258,
-																					"start": 2271,
+																					"pos": 2434,
+																					"start": 2447,
 																					"children": [
 																						{
-																							"end": 2274,
+																							"end": 2450,
 																							"kind": "TemplateHead",
-																							"pos": 2258,
-																							"start": 2271
+																							"pos": 2434,
+																							"start": 2447
 																						},
 																						{
-																							"end": 2292,
+																							"end": 2468,
 																							"kind": "TemplateSpan",
-																							"pos": 2274,
-																							"start": 2274,
+																							"pos": 2450,
+																							"start": 2450,
 																							"children": [
 																								{
-																									"end": 2288,
+																									"end": 2464,
 																									"kind": "Identifier",
 																									"name": "subCommandPath",
-																									"pos": 2274,
-																									"start": 2274
+																									"pos": 2450,
+																									"start": 2450
 																								},
 																								{
-																									"end": 2292,
+																									"end": 2468,
 																									"kind": "TemplateMiddle",
-																									"pos": 2288,
-																									"start": 2288
+																									"pos": 2464,
+																									"start": 2464
 																								}
 																							]
 																						},
 																						{
-																							"end": 2311,
+																							"end": 2487,
 																							"kind": "TemplateSpan",
-																							"pos": 2292,
-																							"start": 2292,
+																							"pos": 2468,
+																							"start": 2468,
 																							"children": [
 																								{
-																									"end": 2309,
+																									"end": 2485,
 																									"kind": "PropertyAccessExpression",
-																									"pos": 2292,
-																									"start": 2292,
+																									"pos": 2468,
+																									"start": 2468,
 																									"children": [
 																										{
-																											"end": 2305,
+																											"end": 2481,
 																											"kind": "Identifier",
 																											"name": "subCommandPkg",
-																											"pos": 2292,
-																											"start": 2292
+																											"pos": 2468,
+																											"start": 2468
 																										},
 																										{
-																											"end": 2309,
+																											"end": 2485,
 																											"kind": "Identifier",
 																											"name": "bin",
-																											"pos": 2306,
-																											"start": 2306
+																											"pos": 2482,
+																											"start": 2482
 																										}
 																									]
 																								},
 																								{
-																									"end": 2311,
+																									"end": 2487,
 																									"kind": "TemplateTail",
-																									"pos": 2309,
-																									"start": 2309
+																									"pos": 2485,
+																									"start": 2485
 																								}
 																							]
 																						}
 																					]
 																				},
 																				{
-																					"end": 2344,
+																					"end": 2520,
 																					"kind": "PropertyAccessExpression",
-																					"pos": 2312,
-																					"start": 2325,
+																					"pos": 2488,
+																					"start": 2501,
 																					"children": [
 																						{
-																							"end": 2332,
+																							"end": 2508,
 																							"kind": "Identifier",
 																							"name": "options",
-																							"pos": 2312,
-																							"start": 2325
+																							"pos": 2488,
+																							"start": 2501
 																						},
 																						{
-																							"end": 2344,
+																							"end": 2520,
 																							"kind": "Identifier",
 																							"name": "jsonApiPath",
-																							"pos": 2333,
-																							"start": 2333
+																							"pos": 2509,
+																							"start": 2509
 																						}
 																					]
 																				},
 																				{
-																					"end": 2383,
+																					"end": 2559,
 																					"kind": "PropertyAccessExpression",
-																					"pos": 2345,
-																					"start": 2358,
+																					"pos": 2521,
+																					"start": 2534,
 																					"children": [
 																						{
-																							"end": 2365,
+																							"end": 2541,
 																							"kind": "Identifier",
 																							"name": "options",
-																							"pos": 2345,
-																							"start": 2358
+																							"pos": 2521,
+																							"start": 2534
 																						},
 																						{
-																							"end": 2383,
+																							"end": 2559,
 																							"kind": "Identifier",
 																							"name": "datatypeExtension",
-																							"pos": 2366,
-																							"start": 2366
+																							"pos": 2542,
+																							"start": 2542
 																						}
 																					]
 																				},
 																				{
-																					"end": 2421,
+																					"end": 2597,
 																					"kind": "PropertyAccessExpression",
-																					"pos": 2384,
-																					"start": 2397,
+																					"pos": 2560,
+																					"start": 2573,
 																					"children": [
 																						{
-																							"end": 2404,
+																							"end": 2580,
 																							"kind": "Identifier",
 																							"name": "options",
-																							"pos": 2384,
-																							"start": 2397
+																							"pos": 2560,
+																							"start": 2573
 																						},
 																						{
-																							"end": 2421,
+																							"end": 2597,
 																							"kind": "Identifier",
 																							"name": "serviceExtension",
-																							"pos": 2405,
-																							"start": 2405
+																							"pos": 2581,
+																							"start": 2581
 																						}
 																					]
 																				},
 																				{
-																					"end": 2458,
+																					"end": 2634,
 																					"kind": "PropertyAccessExpression",
-																					"pos": 2422,
-																					"start": 2435,
+																					"pos": 2598,
+																					"start": 2611,
 																					"children": [
 																						{
-																							"end": 2442,
+																							"end": 2618,
 																							"kind": "Identifier",
 																							"name": "options",
-																							"pos": 2422,
-																							"start": 2435
+																							"pos": 2598,
+																							"start": 2611
 																						},
 																						{
-																							"end": 2458,
+																							"end": 2634,
 																							"kind": "Identifier",
 																							"name": "datatypesOutput",
-																							"pos": 2443,
-																							"start": 2443
+																							"pos": 2619,
+																							"start": 2619
 																						}
 																					]
 																				},
 																				{
-																					"end": 2494,
+																					"end": 2670,
 																					"kind": "PropertyAccessExpression",
-																					"pos": 2459,
-																					"start": 2472,
+																					"pos": 2635,
+																					"start": 2648,
 																					"children": [
 																						{
-																							"end": 2479,
+																							"end": 2655,
 																							"kind": "Identifier",
 																							"name": "options",
-																							"pos": 2459,
-																							"start": 2472
+																							"pos": 2635,
+																							"start": 2648
 																						},
 																						{
-																							"end": 2494,
+																							"end": 2670,
 																							"kind": "Identifier",
 																							"name": "servicesOutput",
-																							"pos": 2480,
-																							"start": 2480
+																							"pos": 2656,
+																							"start": 2656
 																						}
 																					]
 																				},
 																				{
-																					"end": 2529,
+																					"end": 2705,
 																					"kind": "PropertyAccessExpression",
-																					"pos": 2495,
-																					"start": 2508,
+																					"pos": 2671,
+																					"start": 2684,
 																					"children": [
 																						{
-																							"end": 2515,
+																							"end": 2691,
 																							"kind": "Identifier",
 																							"name": "options",
-																							"pos": 2495,
-																							"start": 2508
+																							"pos": 2671,
+																							"start": 2684
 																						},
 																						{
-																							"end": 2529,
+																							"end": 2705,
 																							"kind": "Identifier",
 																							"name": "splitServices",
-																							"pos": 2516,
-																							"start": 2516
+																							"pos": 2692,
+																							"start": 2692
 																						}
 																					]
 																				}
 																			]
 																		},
 																		{
-																			"end": 2605,
+																			"end": 2781,
 																			"kind": "ObjectLiteralExpression",
-																			"pos": 2540,
-																			"start": 2541,
+																			"pos": 2716,
+																			"start": 2717,
 																			"children": [
 																				{
-																					"end": 2595,
+																					"end": 2771,
 																					"kind": "PropertyAssignment",
-																					"pos": 2542,
-																					"start": 2555,
+																					"pos": 2718,
+																					"start": 2731,
 																					"children": [
 																						{
-																							"end": 2560,
+																							"end": 2736,
 																							"kind": "Identifier",
 																							"name": "stdio",
-																							"pos": 2542,
-																							"start": 2555
+																							"pos": 2718,
+																							"start": 2731
 																						},
 																						{
-																							"end": 2595,
+																							"end": 2771,
 																							"kind": "ArrayLiteralExpression",
-																							"pos": 2561,
-																							"start": 2562,
+																							"pos": 2737,
+																							"start": 2738,
 																							"children": [
 																								{
-																									"end": 2572,
+																									"end": 2748,
 																									"kind": "Literal",
-																									"pos": 2563,
-																									"start": 2563
+																									"pos": 2739,
+																									"start": 2739
 																								},
 																								{
-																									"end": 2583,
+																									"end": 2759,
 																									"kind": "Literal",
-																									"pos": 2573,
-																									"start": 2574
+																									"pos": 2749,
+																									"start": 2750
 																								},
 																								{
-																									"end": 2594,
+																									"end": 2770,
 																									"kind": "Literal",
-																									"pos": 2584,
-																									"start": 2585
+																									"pos": 2760,
+																									"start": 2761
 																								}
 																							]
 																						}
@@ -2132,59 +2249,59 @@
 							]
 						},
 						{
-							"end": 2644,
+							"end": 2820,
 							"kind": "ExpressionStatement",
-							"pos": 2614,
-							"start": 2616,
+							"pos": 2790,
+							"start": 2792,
 							"children": [
 								{
-									"end": 2643,
+									"end": 2819,
 									"kind": "CallExpression",
-									"pos": 2614,
-									"start": 2616,
+									"pos": 2790,
+									"start": 2792,
 									"children": [
 										{
-											"end": 2629,
+											"end": 2805,
 											"kind": "PropertyAccessExpression",
-											"pos": 2614,
-											"start": 2616,
+											"pos": 2790,
+											"start": 2792,
 											"children": [
 												{
-													"end": 2623,
+													"end": 2799,
 													"kind": "Identifier",
 													"name": "program",
-													"pos": 2614,
-													"start": 2616
+													"pos": 2790,
+													"start": 2792
 												},
 												{
-													"end": 2629,
+													"end": 2805,
 													"kind": "Identifier",
 													"name": "parse",
-													"pos": 2624,
-													"start": 2624,
+													"pos": 2800,
+													"start": 2800,
 													"type": "function"
 												}
 											]
 										},
 										{
-											"end": 2642,
+											"end": 2818,
 											"kind": "PropertyAccessExpression",
-											"pos": 2630,
-											"start": 2630,
+											"pos": 2806,
+											"start": 2806,
 											"children": [
 												{
-													"end": 2637,
+													"end": 2813,
 													"kind": "Identifier",
 													"name": "process",
-													"pos": 2630,
-													"start": 2630
+													"pos": 2806,
+													"start": 2806
 												},
 												{
-													"end": 2642,
+													"end": 2818,
 													"kind": "Identifier",
 													"name": "argv",
-													"pos": 2638,
-													"start": 2638
+													"pos": 2814,
+													"start": 2814
 												}
 											]
 										}
@@ -2193,10 +2310,10 @@
 							]
 						},
 						{
-							"end": 2645,
+							"end": 2821,
 							"kind": "EndOfFileToken",
-							"pos": 2644,
-							"start": 2645
+							"pos": 2820,
+							"start": 2821
 						}
 					]
 				}
@@ -2204,7 +2321,7 @@
 		],
 		"children": [
 			{
-				"path": "D:\\Documents\\projets\\genese\\cli\\src\\utils\\",
+				"path": "/Users/utilisateur/Documents/projets/genese/cli/src/utils/",
 				"astFiles": [
 					{
 						"name": "paths.util.ts",

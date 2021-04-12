@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import * as program from 'commander';
+import { platformPath } from './utils/paths.util';
 
 const chalk = require('chalk');
 const pkg = require('../package.json');
@@ -19,11 +20,12 @@ program.command('cpx [pathToAnalyse]')
     .option('-r, --refactor', 'EXPERIMENTAL! Enables refactoring report generation')
     .action((pathToAnalyse, options) => {
         // const subCommandPath = `C:\\Users\\gille\\AppData\\Roaming\\npm\\node_modules\\@genese\\complexity`;
-        const subCommandPath = `${__dirname}\\..\\..\\..\\complexity`;
+        // const subCommandPath = `${__dirname}${platformPath(`\\..\\..\\..\\complexity`)}`;
+        const subCommandPath = `${__dirname}${platformPath(`/../../../complexity`)}`;
         // const subCommandPath = `${__dirname}/../../../../complexity`;
-        const subCommandPkg = require(`${subCommandPath}\\dist\\package.json`);
-        // const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
         console.log(chalk.magentaBright('PLATFORM PATHHHHH subCommandPath'), subCommandPath);
+        const subCommandPkg = require(`${subCommandPath}${platformPath(`/dist/package.json`)}`);
+        // const subCommandPkg = require(`${subCommandPath}/dist/package.json`);
         console.log(chalk.magentaBright('PLATFORM PATHHHHH subCommandPkg'), subCommandPkg);
         spawn('node', [
             `${subCommandPath}/${subCommandPkg.bin}`,
