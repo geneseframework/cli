@@ -15,6 +15,7 @@ program.version(pkg.version)
 program.command('cpx [pathToAnalyse]')
     .description('Calculates Complexity Index and cyclomatic complexity')
     .option('-l, --language <language>', 'Language: js, ts, jsx, tsx or java', 'ts')
+    .option('-f, --framework <framework>', 'Framework: angular or react')
     .option('-md, --markdown', 'Markdown type report')
     .option('-c, --console', 'Disables report generation and outputs to console')
     .option('-r, --refactor', 'EXPERIMENTAL! Enables refactoring report generation')
@@ -27,7 +28,8 @@ program.command('cpx [pathToAnalyse]')
             options.language ?? false,
             options.markdown ?? false,
             options.console ?? false,
-            options.refactor ?? false
+            options.refactor ?? false,
+            options.framework ?? false,
         ], {
             stdio: ['inherit', 'inherit', 'inherit']
         });
